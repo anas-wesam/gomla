@@ -54,10 +54,10 @@ export default function HomePage() {
       </header>
 
       {/* Hero Banner */}
-      <div className="bg-gradient-to-l from-blue-800 to-blue-600 text-white py-10 px-4">
+      <div className="bg-gradient-to-l from-gray-900 to-gray-700 text-white py-10 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-3">صفوة — أدوات منزلية بأسعار الجملة</h2>
-          <p className="text-blue-100 text-lg mb-6">
+          <p className="text-gray-300 text-lg mb-6">
             توريد وتجارة جملة في أدوات المنزل — حد أدنى للطلب | شحن لجميع المحافظات
           </p>
           <div className="flex justify-center gap-6 text-sm flex-wrap">
@@ -84,7 +84,7 @@ export default function HomePage() {
             placeholder="ابحث عن منتج..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pr-12 pl-4 py-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 text-base"
+            className="w-full pr-12 pl-4 py-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base"
           />
         </div>
 
@@ -96,8 +96,8 @@ export default function HomePage() {
               onClick={() => setSelectedCategory(cat)}
               className={`whitespace-nowrap px-5 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedCategory === cat
-                  ? "bg-blue-700 text-white shadow-md scale-105"
-                  : "bg-white text-gray-600 border border-gray-200 hover:border-blue-400 hover:text-blue-700"
+                  ? "bg-yellow-400 text-gray-900 shadow-md scale-105"
+                  : "bg-white text-gray-600 border border-gray-200 hover:border-yellow-400 hover:text-gray-900"
               }`}
             >
               {cat}
@@ -113,7 +113,7 @@ export default function HomePage() {
             { icon: <ShoppingCart size={22} />, label: "طلبات يومية", value: "500+" },
           ].map((s) => (
             <div key={s.label} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100">
-              <div className="text-blue-600 flex justify-center mb-2">{s.icon}</div>
+              <div className="text-yellow-500 flex justify-center mb-2">{s.icon}</div>
               <div className="text-xl font-bold text-gray-800">{s.value}</div>
               <div className="text-xs text-gray-500 mt-1">{s.label}</div>
             </div>
@@ -134,7 +134,7 @@ export default function HomePage() {
                 onClick={() => setSelectedProduct(p.id)}
                 className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer"
               >
-                <div className="bg-gradient-to-br from-blue-50 to-gray-100 h-36 flex items-center justify-center text-6xl relative">
+                <div className="bg-gradient-to-br from-yellow-50 to-gray-100 h-36 flex items-center justify-center text-6xl relative">
                   {p.image}
                   {p.discount && (
                     <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
@@ -149,13 +149,13 @@ export default function HomePage() {
                 </div>
 
                 <div className="p-4">
-                  <span className="text-xs text-blue-600 font-medium bg-blue-50 px-2 py-1 rounded-full">{p.category}</span>
+                  <span className="text-xs text-yellow-700 font-medium bg-yellow-50 px-2 py-1 rounded-full">{p.category}</span>
                   <h3 className="font-bold text-gray-800 mt-2 mb-1 text-sm leading-tight">{p.name}</h3>
                   <p className="text-xs text-gray-500 mb-3 leading-relaxed line-clamp-2">{p.description}</p>
 
                   <div className="border-t border-gray-100 pt-3 flex items-center justify-between">
                     <div>
-                      <div className="text-lg font-bold text-blue-700">
+                      <div className="text-lg font-bold text-gray-900">
                         {p.discount ? (
                           <>
                             <span className="text-red-500">{Math.round(p.price * (1 - p.discount / 100))} جم</span>
@@ -189,7 +189,7 @@ export default function HomePage() {
             className="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-gradient-to-br from-blue-50 to-gray-100 h-48 flex items-center justify-center text-8xl relative">
+            <div className="bg-gradient-to-br from-yellow-50 to-gray-100 h-48 flex items-center justify-center text-8xl relative">
               {product.image}
               {product.discount && (
                 <span className="absolute top-4 left-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
@@ -200,7 +200,7 @@ export default function HomePage() {
             <div className="p-6">
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <span className="text-xs text-blue-600 font-medium bg-blue-50 px-2 py-1 rounded-full">{product.category}</span>
+                  <span className="text-xs text-yellow-700 font-medium bg-yellow-50 px-2 py-1 rounded-full">{product.category}</span>
                   <h2 className="text-xl font-bold text-gray-800 mt-2">{product.name}</h2>
                 </div>
                 <div className="flex items-center gap-1 text-yellow-400">
@@ -216,7 +216,7 @@ export default function HomePage() {
 
               <div className="bg-gray-50 rounded-xl p-4 mb-4 grid grid-cols-2 gap-3">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-700">
+                  <div className="text-2xl font-bold text-gray-900">
                     {product.discount
                       ? Math.round(product.price * (1 - product.discount / 100))
                       : product.price}{" "}
@@ -264,16 +264,16 @@ export default function HomePage() {
       )}
 
       {/* Footer */}
-      <footer className="bg-blue-900 text-white mt-16 py-10 px-4">
+      <footer className="bg-gray-900 text-white mt-16 py-10 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="text-xl font-bold mb-2">🏪 صفوة للأدوات المنزلية</h3>
-          <p className="text-blue-200 text-sm mb-4">صفوة — تجارة جملة أدوات منزلية بأفضل الأسعار</p>
-          <div className="flex justify-center gap-6 text-sm text-blue-200 flex-wrap">
+          <p className="text-gray-400 text-sm mb-4">صفوة — تجارة جملة أدوات منزلية بأفضل الأسعار</p>
+          <div className="flex justify-center gap-6 text-sm text-gray-400 flex-wrap">
             <span>📞 010-0000-0000</span>
             <span>📍 القاهرة، مصر</span>
             <span>🕐 يومياً 9ص - 6م</span>
           </div>
-          <div className="mt-6 pt-4 border-t border-blue-800 text-blue-400 text-xs">
+          <div className="mt-6 pt-4 border-t border-gray-700 text-gray-500 text-xs">
             جميع الحقوق محفوظة © 2026
           </div>
         </div>
