@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { products, categories } from "@/lib/products";
+import { categories } from "@/lib/products";
+import { useProducts } from "@/lib/useProducts";
 import { Phone, MessageCircle, Search, Package, Tag, ShoppingCart, Star, CheckCircle, XCircle } from "lucide-react";
 
 export default function HomePage() {
+  const { products } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState("الكل");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
@@ -17,7 +19,7 @@ export default function HomePage() {
         p.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchCat && matchSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, products]);
 
   const product = selectedProduct !== null ? products.find((p) => p.id === selectedProduct) : null;
 
