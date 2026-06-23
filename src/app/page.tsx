@@ -26,11 +26,11 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-gradient-to-l from-blue-900 to-blue-700 text-white shadow-lg">
+      <header className="bg-gradient-to-l from-yellow-500 to-yellow-400 text-gray-900 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center gap-3 sm:justify-between">
           <div className="text-center sm:text-right">
             <h1 className="text-lg sm:text-2xl font-bold">🏪 صفوة للأدوات المنزلية</h1>
-            <p className="text-blue-200 text-xs sm:text-sm mt-0.5">أسعار الجملة الأفضل في السوق</p>
+            <p className="text-yellow-800 text-xs sm:text-sm mt-0.5">أسعار الجملة الأفضل في السوق</p>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <a
@@ -44,7 +44,7 @@ export default function HomePage() {
             </a>
             <a
               href="tel:+201000000000"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white text-blue-900 hover:bg-blue-50 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gray-900 text-white hover:bg-gray-800 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
             >
               <Phone size={18} />
               اتصل بنا
