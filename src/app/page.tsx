@@ -29,7 +29,7 @@ export default function HomePage() {
       <header className="bg-gradient-to-l from-blue-900 to-blue-700 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center gap-3 sm:justify-between">
           <div className="text-center sm:text-right">
-            <h1 className="text-lg sm:text-2xl font-bold">🏪 متجر الجملة للأدوات المنزلية</h1>
+            <h1 className="text-lg sm:text-2xl font-bold">🏪 صفوة للأدوات المنزلية</h1>
             <p className="text-blue-200 text-xs sm:text-sm mt-0.5">أسعار الجملة الأفضل في السوق</p>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
@@ -56,7 +56,7 @@ export default function HomePage() {
       {/* Hero Banner */}
       <div className="bg-gradient-to-l from-blue-800 to-blue-600 text-white py-10 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-3">أدوات منزلية بأسعار الجملة</h2>
+          <h2 className="text-3xl font-bold mb-3">صفوة — أدوات منزلية بأسعار الجملة</h2>
           <p className="text-blue-100 text-lg mb-6">
             توريد وتجارة جملة في أدوات المنزل — حد أدنى للطلب | شحن لجميع المحافظات
           </p>
@@ -266,8 +266,8 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="bg-blue-900 text-white mt-16 py-10 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <h3 className="text-xl font-bold mb-2">🏪 متجر الجملة للأدوات المنزلية</h3>
-          <p className="text-blue-200 text-sm mb-4">تجارة جملة أدوات منزلية بأفضل الأسعار</p>
+          <h3 className="text-xl font-bold mb-2">🏪 صفوة للأدوات المنزلية</h3>
+          <p className="text-blue-200 text-sm mb-4">صفوة — تجارة جملة أدوات منزلية بأفضل الأسعار</p>
           <div className="flex justify-center gap-6 text-sm text-blue-200 flex-wrap">
             <span>📞 010-0000-0000</span>
             <span>📍 القاهرة، مصر</span>
