@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "صفوة | أدوات منزلية بالجملة",
-  description: "متجر صفوة لتجارة الجملة في الأدوات المنزلية — أفضل الأسعار وشحن لجميع المحافظات",
+  title: "Cash Cow | أدوات منزلية بالجملة",
+  description: "متجر Cash Cow لتجارة الجملة في الأدوات المنزلية — أفضل الأسعار وشحن لجميع المحافظات",
 };
 
 export default function RootLayout({

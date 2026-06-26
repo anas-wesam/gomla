@@ -30,10 +30,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg flex items-center justify-center text-black font-black text-lg" style={{ background: "#f59e0b" }}>
-              ص
-            </div>
+              🐄
+</div>
             <div>
-              <div className="font-black text-lg leading-none">صفوة</div>
+              <div className="font-black text-lg leading-none">Cash Cow</div>
               <div className="text-xs leading-none" style={{ color: "#666" }}>أدوات منزلية بالجملة</div>
             </div>
           </div>
@@ -286,8 +286,8 @@ export default function HomePage() {
       <footer style={{ borderTop: "1px solid #1a1a1a" }}>
         <div className="max-w-6xl mx-auto px-4 py-10 text-center">
           <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-black font-black" style={{ background: "#f59e0b" }}>ص</div>
-            <span className="font-black text-lg">صفوة</span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "#f59e0b" }}>🐄</div>
+            <span className="font-black text-lg">Cash Cow</span>
           </div>
           <p className="text-sm mb-4" style={{ color: "#555" }}>تجارة جملة أدوات منزلية بأفضل الأسعار</p>
           <div className="flex justify-center gap-6 text-sm flex-wrap mb-6" style={{ color: "#444" }}>
@@ -295,7 +295,7 @@ export default function HomePage() {
             <span>📍 القاهرة، مصر</span>
             <span>🕐 يومياً 9ص - 6م</span>
           </div>
-          <div className="text-xs" style={{ color: "#333" }}>جميع الحقوق محفوظة © 2026 صفوة</div>
+          <div className="text-xs" style={{ color: "#333" }}>جميع الحقوق محفوظة © 2026 Cash Cow</div>
         </div>
       </footer>
     </div>
