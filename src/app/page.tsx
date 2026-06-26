@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { categories } from "@/lib/products";
 import { useProducts } from "@/lib/useProducts";
-import { Phone, MessageCircle, Search, Package, Tag, ShoppingCart, Star, CheckCircle, XCircle } from "lucide-react";
+import { Phone, MessageCircle, Search, Package, CheckCircle, XCircle, ArrowLeft, Zap, Truck, Shield } from "lucide-react";
 
 export default function HomePage() {
   const { products } = useProducts();
@@ -15,8 +15,7 @@ export default function HomePage() {
     return products.filter((p) => {
       const matchCat = selectedCategory === "الكل" || p.category === selectedCategory;
       const matchSearch =
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.toLowerCase());
+        p.name.includes(searchQuery) || p.description.includes(searchQuery);
       return matchCat && matchSearch;
     });
   }, [selectedCategory, searchQuery, products]);
@@ -24,152 +23,182 @@ export default function HomePage() {
   const product = selectedProduct !== null ? products.find((p) => p.id === selectedProduct) : null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-gradient-to-l from-yellow-500 to-yellow-400 text-gray-900 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center gap-3 sm:justify-between">
-          <div className="text-center sm:text-right">
-            <h1 className="text-lg sm:text-2xl font-bold">🏪 صفوة للأدوات المنزلية</h1>
-            <p className="text-yellow-800 text-xs sm:text-sm mt-0.5">أسعار الجملة الأفضل في السوق</p>
+    <div className="min-h-screen" style={{ background: "#0a0a0a", color: "#fff" }}>
+
+      {/* ═══ HEADER ═══ */}
+      <header style={{ borderBottom: "1px solid #1a1a1a" }}>
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-black font-black text-lg" style={{ background: "#f59e0b" }}>
+              ص
+            </div>
+            <div>
+              <div className="font-black text-lg leading-none">صفوة</div>
+              <div className="text-xs leading-none" style={{ color: "#666" }}>أدوات منزلية بالجملة</div>
+            </div>
           </div>
-          <div className="flex gap-2 w-full sm:w-auto">
+          <div className="flex gap-2">
             <a
               href="https://wa.me/201000000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+              target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold text-black transition-opacity hover:opacity-80"
+              style={{ background: "#f59e0b" }}
             >
-              <MessageCircle size={18} />
-              واتساب
+              <MessageCircle size={15} />
+              <span className="hidden sm:inline">واتساب</span>
             </a>
             <a
               href="tel:+201000000000"
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-gray-900 text-white hover:bg-gray-800 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors"
+              style={{ border: "1px solid #2a2a2a" }}
             >
-              <Phone size={18} />
-              اتصل بنا
+              <Phone size={15} />
+              <span className="hidden sm:inline">اتصل بنا</span>
             </a>
           </div>
         </div>
       </header>
 
-      {/* Hero Banner */}
-      <div className="bg-gradient-to-l from-gray-900 to-gray-700 text-white py-10 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-3">صفوة — أدوات منزلية بأسعار الجملة</h2>
-          <p className="text-gray-300 text-lg mb-6">
-            توريد وتجارة جملة في أدوات المنزل — حد أدنى للطلب | شحن لجميع المحافظات
+      {/* ═══ HERO ═══ */}
+      <section className="max-w-6xl mx-auto px-4 pt-16 pb-12">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6" style={{ background: "#1a1200", color: "#f59e0b", border: "1px solid #3a2800" }}>
+            <Zap size={12} fill="currentColor" />
+            أفضل أسعار الجملة في السوق
+          </div>
+          <h1 className="text-5xl sm:text-7xl font-black leading-none mb-4" style={{ letterSpacing: "-0.03em" }}>
+            أدوات منزلية
+            <br />
+            <span style={{ color: "#f59e0b" }}>بسعر الجملة</span>
+          </h1>
+          <p className="text-lg mb-8 max-w-xl mx-auto leading-relaxed" style={{ color: "#888" }}>
+            توريد وتجارة جملة — شحن لجميع المحافظات — حد أدنى للطلب — ضمان الجودة
           </p>
-          <div className="flex justify-center gap-6 text-sm flex-wrap">
-            {[
-              { icon: "🚚", text: "شحن سريع لجميع المحافظات" },
-              { icon: "💰", text: "أفضل أسعار الجملة" },
-              { icon: "✅", text: "ضمان الجودة" },
-            ].map((item) => (
-              <div key={item.text} className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
-                <span>{item.icon}</span>
-                <span>{item.text}</span>
-              </div>
-            ))}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="https://wa.me/201000000000"
+              target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-black transition-opacity hover:opacity-90"
+              style={{ background: "#f59e0b" }}
+            >
+              <MessageCircle size={18} />
+              اطلب الآن على واتساب
+            </a>
+            <a
+              href="#products"
+              className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-medium transition-colors"
+              style={{ border: "1px solid #2a2a2a", color: "#aaa" }}
+            >
+              تصفح المنتجات
+              <ArrowLeft size={16} />
+            </a>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Stats bar */}
+        <div className="grid grid-cols-3 gap-4 mt-14">
+          {[
+            { icon: <Package size={20} />, value: `${products.length}+`, label: "منتج" },
+            { icon: <Truck size={20} />, value: "شحن", label: "لجميع المحافظات" },
+            { icon: <Shield size={20} />, value: "ضمان", label: "الجودة مضمونة" },
+          ].map((s) => (
+            <div key={s.label} className="rounded-2xl p-5 text-center" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
+              <div className="flex justify-center mb-2" style={{ color: "#f59e0b" }}>{s.icon}</div>
+              <div className="text-2xl font-black">{s.value}</div>
+              <div className="text-xs mt-0.5" style={{ color: "#555" }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ PRODUCTS ═══ */}
+      <section id="products" className="max-w-6xl mx-auto px-4 pb-20">
+
         {/* Search */}
-        <div className="relative mb-6">
-          <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+        <div className="relative mb-5">
+          <Search className="absolute right-4 top-1/2 -translate-y-1/2" size={18} style={{ color: "#444" }} />
           <input
             type="text"
             placeholder="ابحث عن منتج..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pr-12 pl-4 py-3 rounded-xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base"
+            className="w-full pr-12 pl-4 py-3.5 rounded-xl text-sm outline-none"
+            style={{ background: "#111", border: "1px solid #222", color: "#fff" }}
           />
         </div>
 
-        {/* Categories */}
-        <div className="flex gap-3 overflow-x-auto pb-2 mb-8">
+        {/* Category pills */}
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-8">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`whitespace-nowrap px-5 py-2 rounded-full text-sm font-medium transition-all ${
+              className="whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-all"
+              style={
                 selectedCategory === cat
-                  ? "bg-yellow-400 text-gray-900 shadow-md scale-105"
-                  : "bg-white text-gray-600 border border-gray-200 hover:border-yellow-400 hover:text-gray-900"
-              }`}
+                  ? { background: "#f59e0b", color: "#000" }
+                  : { background: "#111", color: "#888", border: "1px solid #222" }
+              }
             >
               {cat}
             </button>
           ))}
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          {[
-            { icon: <Package size={22} />, label: "عدد المنتجات", value: `${products.length}+` },
-            { icon: <Tag size={22} />, label: "أقل الأسعار", value: "مضمون" },
-            { icon: <ShoppingCart size={22} />, label: "طلبات يومية", value: "500+" },
-          ].map((s) => (
-            <div key={s.label} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100">
-              <div className="text-yellow-500 flex justify-center mb-2">{s.icon}</div>
-              <div className="text-xl font-bold text-gray-800">{s.value}</div>
-              <div className="text-xs text-gray-500 mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Products Grid */}
+        {/* Grid */}
         {filtered.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">
-            <Package size={48} className="mx-auto mb-4 opacity-30" />
-            <p className="text-lg">مفيش منتجات بهذا البحث</p>
+          <div className="text-center py-20" style={{ color: "#444" }}>
+            <Package size={48} className="mx-auto mb-4 opacity-20" />
+            <p>مفيش منتجات بهذا البحث</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filtered.map((p) => (
               <div
                 key={p.id}
                 onClick={() => setSelectedProduct(p.id)}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer"
+                className="rounded-2xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-2xl"
+                style={{ background: "#111", border: "1px solid #1e1e1e" }}
               >
-                <div className="bg-gradient-to-br from-yellow-50 to-gray-100 h-36 flex items-center justify-center text-6xl relative">
+                {/* Image area */}
+                <div className="h-36 flex items-center justify-center text-6xl relative" style={{ background: "#161616" }}>
                   {p.image}
                   {p.discount && (
-                    <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      خصم {p.discount}%
+                    <span className="absolute top-3 right-3 text-black text-xs font-black px-2 py-1 rounded-full" style={{ background: "#f59e0b" }}>
+                      -{p.discount}%
                     </span>
                   )}
                   {!p.inStock && (
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                      <span className="text-white font-bold text-sm bg-red-600 px-3 py-1 rounded-full">نفذ من المخزن</span>
+                    <div className="absolute inset-0 flex items-center justify-center" style={{ background: "rgba(0,0,0,0.7)" }}>
+                      <span className="text-white font-bold text-xs px-3 py-1 rounded-full" style={{ background: "#dc2626" }}>نفذ</span>
                     </div>
                   )}
                 </div>
 
                 <div className="p-4">
-                  <span className="text-xs text-yellow-700 font-medium bg-yellow-50 px-2 py-1 rounded-full">{p.category}</span>
-                  <h3 className="font-bold text-gray-800 mt-2 mb-1 text-sm leading-tight">{p.name}</h3>
-                  <p className="text-xs text-gray-500 mb-3 leading-relaxed line-clamp-2">{p.description}</p>
+                  <span className="text-xs font-medium px-2 py-0.5 rounded-full" style={{ background: "#1a1200", color: "#f59e0b" }}>
+                    {p.category}
+                  </span>
+                  <h3 className="font-bold mt-2 mb-1 text-sm leading-snug text-white">{p.name}</h3>
+                  <p className="text-xs leading-relaxed line-clamp-2 mb-3" style={{ color: "#555" }}>{p.description}</p>
 
-                  <div className="border-t border-gray-100 pt-3 flex items-center justify-between">
+                  <div className="flex items-end justify-between pt-3" style={{ borderTop: "1px solid #1e1e1e" }}>
                     <div>
-                      <div className="text-lg font-bold text-gray-900">
-                        {p.discount ? (
-                          <>
-                            <span className="text-red-500">{Math.round(p.price * (1 - p.discount / 100))} جم</span>
-                            <span className="text-xs text-gray-400 line-through mr-1">{p.price}</span>
-                          </>
-                        ) : (
-                          <span>{p.price} جم</span>
-                        )}
-                      </div>
-                      <div className="text-xs text-gray-400">للـ {p.unit}</div>
+                      {p.discount ? (
+                        <>
+                          <div className="text-lg font-black" style={{ color: "#f59e0b" }}>
+                            {Math.round(p.price * (1 - p.discount / 100))} جم
+                          </div>
+                          <div className="text-xs line-through" style={{ color: "#444" }}>{p.price} جم</div>
+                        </>
+                      ) : (
+                        <div className="text-lg font-black text-white">{p.price} جم</div>
+                      )}
+                      <div className="text-xs" style={{ color: "#444" }}>للـ {p.unit}</div>
                     </div>
-                    <div className="text-xs text-gray-500 text-left">
+                    <div className="text-left text-xs" style={{ color: "#555" }}>
                       <div>حد أدنى</div>
-                      <div className="font-semibold text-gray-700">{p.minOrder} {p.unit}</div>
+                      <div className="font-bold text-white">{p.minOrder} {p.unit}</div>
                     </div>
                   </div>
                 </div>
@@ -177,83 +206,73 @@ export default function HomePage() {
             ))}
           </div>
         )}
-      </div>
+      </section>
 
-      {/* Product Modal */}
+      {/* ═══ PRODUCT MODAL ═══ */}
       {product && (
         <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+          style={{ background: "rgba(0,0,0,0.85)" }}
           onClick={() => setSelectedProduct(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden"
+            className="w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl overflow-hidden"
+            style={{ background: "#111", border: "1px solid #1e1e1e" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-gradient-to-br from-yellow-50 to-gray-100 h-48 flex items-center justify-center text-8xl relative">
+            <div className="h-52 flex items-center justify-center text-8xl relative" style={{ background: "#161616" }}>
               {product.image}
               {product.discount && (
-                <span className="absolute top-4 left-4 bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                  خصم {product.discount}%
+                <span className="absolute top-4 right-4 text-black text-sm font-black px-3 py-1 rounded-full" style={{ background: "#f59e0b" }}>
+                  -{product.discount}%
                 </span>
               )}
             </div>
+
             <div className="p-6">
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <span className="text-xs text-yellow-700 font-medium bg-yellow-50 px-2 py-1 rounded-full">{product.category}</span>
-                  <h2 className="text-xl font-bold text-gray-800 mt-2">{product.name}</h2>
-                </div>
-                <div className="flex items-center gap-1 text-yellow-400">
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} fill="currentColor" />
-                  <Star size={16} className="text-gray-200" fill="currentColor" />
-                </div>
-              </div>
+              <span className="text-xs font-medium px-2 py-0.5 rounded-full" style={{ background: "#1a1200", color: "#f59e0b" }}>
+                {product.category}
+              </span>
+              <h2 className="text-xl font-black text-white mt-2 mb-1">{product.name}</h2>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: "#666" }}>{product.description}</p>
 
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">{product.description}</p>
-
-              <div className="bg-gray-50 rounded-xl p-4 mb-4 grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 rounded-xl p-4 mb-4" style={{ background: "#161616" }}>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">
-                    {product.discount
-                      ? Math.round(product.price * (1 - product.discount / 100))
-                      : product.price}{" "}
-                    جم
+                  <div className="text-2xl font-black" style={{ color: product.discount ? "#f59e0b" : "#fff" }}>
+                    {product.discount ? Math.round(product.price * (1 - product.discount / 100)) : product.price} جم
                   </div>
                   {product.discount && (
-                    <div className="text-sm text-gray-400 line-through">{product.price} جم</div>
+                    <div className="text-sm line-through" style={{ color: "#444" }}>{product.price} جم</div>
                   )}
-                  <div className="text-xs text-gray-500 mt-1">سعر الجملة / {product.unit}</div>
+                  <div className="text-xs mt-1" style={{ color: "#555" }}>سعر الجملة / {product.unit}</div>
                 </div>
-                <div className="text-center border-r border-gray-200">
-                  <div className="text-2xl font-bold text-gray-700">{product.minOrder}</div>
-                  <div className="text-xs text-gray-500 mt-1">الحد الأدنى للطلب ({product.unit})</div>
+                <div className="text-center" style={{ borderRight: "1px solid #222" }}>
+                  <div className="text-2xl font-black text-white">{product.minOrder}</div>
+                  <div className="text-xs mt-1" style={{ color: "#555" }}>الحد الأدنى ({product.unit})</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mb-5">
-                {product.inStock ? (
-                  <><CheckCircle size={18} className="text-green-500" /><span className="text-green-600 text-sm font-medium">متاح في المخزن</span></>
-                ) : (
-                  <><XCircle size={18} className="text-red-500" /><span className="text-red-600 text-sm font-medium">نفذ من المخزن</span></>
-                )}
+              <div className="flex items-center gap-2 mb-4">
+                {product.inStock
+                  ? <><CheckCircle size={16} style={{ color: "#22c55e" }} /><span className="text-sm" style={{ color: "#22c55e" }}>متاح في المخزن</span></>
+                  : <><XCircle size={16} style={{ color: "#ef4444" }} /><span className="text-sm" style={{ color: "#ef4444" }}>نفذ من المخزن</span></>
+                }
               </div>
 
               <div className="flex gap-3">
                 <a
                   href={`https://wa.me/201000000000?text=مرحبا، أريد الاستفسار عن: ${product.name}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-medium text-center flex items-center justify-center gap-2 transition-colors"
+                  target="_blank" rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-black transition-opacity hover:opacity-90"
+                  style={{ background: "#f59e0b" }}
                 >
                   <MessageCircle size={18} />
                   اطلب الآن
                 </a>
                 <button
                   onClick={() => setSelectedProduct(null)}
-                  className="px-5 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+                  className="px-5 rounded-xl font-medium transition-colors"
+                  style={{ border: "1px solid #2a2a2a", color: "#666" }}
                 >
                   إغلاق
                 </button>
@@ -263,19 +282,20 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-16 py-10 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h3 className="text-xl font-bold mb-2">🏪 صفوة للأدوات المنزلية</h3>
-          <p className="text-gray-400 text-sm mb-4">صفوة — تجارة جملة أدوات منزلية بأفضل الأسعار</p>
-          <div className="flex justify-center gap-6 text-sm text-gray-400 flex-wrap">
+      {/* ═══ FOOTER ═══ */}
+      <footer style={{ borderTop: "1px solid #1a1a1a" }}>
+        <div className="max-w-6xl mx-auto px-4 py-10 text-center">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-black font-black" style={{ background: "#f59e0b" }}>ص</div>
+            <span className="font-black text-lg">صفوة</span>
+          </div>
+          <p className="text-sm mb-4" style={{ color: "#555" }}>تجارة جملة أدوات منزلية بأفضل الأسعار</p>
+          <div className="flex justify-center gap-6 text-sm flex-wrap mb-6" style={{ color: "#444" }}>
             <span>📞 010-0000-0000</span>
             <span>📍 القاهرة، مصر</span>
             <span>🕐 يومياً 9ص - 6م</span>
           </div>
-          <div className="mt-6 pt-4 border-t border-gray-700 text-gray-500 text-xs">
-            جميع الحقوق محفوظة © 2026
-          </div>
+          <div className="text-xs" style={{ color: "#333" }}>جميع الحقوق محفوظة © 2026 صفوة</div>
         </div>
       </footer>
     </div>
