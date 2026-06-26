@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { categories } from "@/lib/products";
 import { useProducts } from "@/lib/useProducts";
-import { Phone, MessageCircle, Search, Package, CheckCircle, XCircle, ArrowLeft, Zap, Truck, Shield } from "lucide-react";
+import { Phone, MessageCircle, Search, Package, CheckCircle, XCircle } from "lucide-react";
 
 export default function HomePage() {
   const { products } = useProducts();
@@ -29,12 +29,12 @@ export default function HomePage() {
       <header style={{ borderBottom: "1px solid #1a1a1a" }}>
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center text-black font-black text-lg" style={{ background: "#f59e0b" }}>
-              🐄
-</div>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm tracking-tight" style={{ background: "#f59e0b", color: "#000", letterSpacing: "-0.05em" }}>
+              CC
+            </div>
             <div>
               <div className="font-black text-lg leading-none">Cash Cow</div>
-              <div className="text-xs leading-none" style={{ color: "#666" }}>أدوات منزلية بالجملة</div>
+              <div className="text-xs leading-none" style={{ color: "#666" }}>لجملة الجملة</div>
             </div>
           </div>
           <div className="flex gap-2">
@@ -59,57 +59,12 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* ═══ HERO ═══ */}
-      <section className="max-w-6xl mx-auto px-4 pt-16 pb-12">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6" style={{ background: "#1a1200", color: "#f59e0b", border: "1px solid #3a2800" }}>
-            <Zap size={12} fill="currentColor" />
-            أفضل أسعار الجملة في السوق
-          </div>
-          <h1 className="text-5xl sm:text-7xl font-black leading-none mb-4" style={{ letterSpacing: "-0.03em" }}>
-            أدوات منزلية
-            <br />
-            <span style={{ color: "#f59e0b" }}>بسعر الجملة</span>
-          </h1>
-          <p className="text-lg mb-8 max-w-xl mx-auto leading-relaxed" style={{ color: "#888" }}>
-            توريد وتجارة جملة — شحن لجميع المحافظات — حد أدنى للطلب — ضمان الجودة
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="https://wa.me/201000000000"
-              target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-black transition-opacity hover:opacity-90"
-              style={{ background: "#f59e0b" }}
-            >
-              <MessageCircle size={18} />
-              اطلب الآن على واتساب
-            </a>
-            <a
-              href="#products"
-              className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-medium transition-colors"
-              style={{ border: "1px solid #2a2a2a", color: "#aaa" }}
-            >
-              تصفح المنتجات
-              <ArrowLeft size={16} />
-            </a>
-          </div>
-        </div>
-
-        {/* Stats bar */}
-        <div className="grid grid-cols-3 gap-4 mt-14">
-          {[
-            { icon: <Package size={20} />, value: `${products.length}+`, label: "منتج" },
-            { icon: <Truck size={20} />, value: "شحن", label: "لجميع المحافظات" },
-            { icon: <Shield size={20} />, value: "ضمان", label: "الجودة مضمونة" },
-          ].map((s) => (
-            <div key={s.label} className="rounded-2xl p-5 text-center" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-              <div className="flex justify-center mb-2" style={{ color: "#f59e0b" }}>{s.icon}</div>
-              <div className="text-2xl font-black">{s.value}</div>
-              <div className="text-xs mt-0.5" style={{ color: "#555" }}>{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ═══ SLOGAN STRIP ═══ */}
+      <div className="max-w-6xl mx-auto px-4 py-5">
+        <p className="text-sm font-medium" style={{ color: "#555" }}>
+          <span className="font-black" style={{ color: "#f59e0b" }}>Cash Cow</span> — لجملة الجملة
+        </p>
+      </div>
 
       {/* ═══ PRODUCTS ═══ */}
       <section id="products" className="max-w-6xl mx-auto px-4 pb-20">
@@ -286,7 +241,7 @@ export default function HomePage() {
       <footer style={{ borderTop: "1px solid #1a1a1a" }}>
         <div className="max-w-6xl mx-auto px-4 py-10 text-center">
           <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "#f59e0b" }}>🐄</div>
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs" style={{ background: "#f59e0b", color: "#000" }}>CC</div>
             <span className="font-black text-lg">Cash Cow</span>
           </div>
           <p className="text-sm mb-4" style={{ color: "#555" }}>تجارة جملة أدوات منزلية بأفضل الأسعار</p>
