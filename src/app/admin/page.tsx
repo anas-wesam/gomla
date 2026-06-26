@@ -148,13 +148,6 @@ export default function AdminPage() {
           <h2 className="font-bold text-gray-700 text-lg">المنتجات</h2>
           <div className="flex gap-2">
             <button
-              onClick={() => { if (confirm("هتعيد كل المنتجات للافتراضية؟")) resetToDefault(); }}
-              className="flex items-center gap-2 border border-gray-200 bg-white hover:bg-gray-50 text-gray-600 px-3 py-2 rounded-xl text-sm transition-colors"
-            >
-              <RotateCcw size={15} />
-              إعادة تعيين
-            </button>
-            <button
               onClick={openAdd}
               className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors"
             >
