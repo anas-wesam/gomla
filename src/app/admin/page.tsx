@@ -74,7 +74,7 @@ export default function AdminPage() {
 
   if (!authed) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4" style={{ colorScheme: "light", color: "#111" }}>
         <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm">
           <div className="text-center mb-6">
             <div className="text-4xl mb-3">🏪</div>
@@ -102,7 +102,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" style={{ colorScheme: "light", color: "#111" }}>
       {/* Header */}
       <header className="bg-blue-900 text-white px-4 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
