@@ -176,7 +176,10 @@ export default function AdminPage() {
                   <tr key={p.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">{p.image}</span>
+                        {p.image?.startsWith("data:") || p.image?.startsWith("http")
+                          ? <img src={p.image} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" />
+                          : <span className="text-2xl">{p.image}</span>
+                        }
                         <div>
                           <div className="font-medium text-gray-800">{p.name}</div>
                           <div className="text-xs text-gray-400 sm:hidden">{p.category}</div>
@@ -231,26 +234,53 @@ export default function AdminPage() {
             </div>
 
             <div className="p-5 space-y-4">
-              {/* Image & Name */}
-              <div className="flex gap-3">
-                <div className="w-20">
-                  <label className="text-xs text-gray-500 block mb-1">إيموجي</label>
-                  <input
-                    value={form.image}
-                    onChange={(e) => setForm({ ...form, image: e.target.value })}
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-center text-2xl focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    maxLength={4}
-                  />
+              {/* Image upload */}
+              <div>
+                <label className="text-xs text-gray-500 block mb-2">صورة المنتج</label>
+                <div className="flex items-center gap-3">
+                  <div className="w-20 h-20 rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden bg-gray-50 shrink-0">
+                    {form.image && form.image.length > 10 ? (
+                      <img src={form.image} alt="" className="w-full h-full object-cover rounded-xl" />
+                    ) : (
+                      <span className="text-3xl">{form.image || "📦"}</span>
+                    )}
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <label className="flex items-center justify-center gap-2 cursor-pointer w-full py-2.5 rounded-xl text-sm font-medium border border-gray-200 hover:bg-gray-50 transition-colors">
+                      <span>📁 رفع صورة</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = () => setForm({ ...form, image: reader.result as string });
+                          reader.readAsDataURL(file);
+                        }}
+                      />
+                    </label>
+                    <p className="text-xs text-gray-400 text-center">أو اكتب إيموجي</p>
+                    <input
+                      value={form.image.startsWith("data:") ? "" : form.image}
+                      placeholder="📦"
+                      onChange={(e) => setForm({ ...form, image: e.target.value })}
+                      className="w-full border border-gray-200 rounded-xl px-3 py-2 text-center text-xl focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                      maxLength={4}
+                    />
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <label className="text-xs text-gray-500 block mb-1">اسم المنتج *</label>
-                  <input
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="مثال: طقم أواني 6 قطع"
-                    className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  />
-                </div>
+              </div>
+              {/* Name */}
+              <div>
+                <label className="text-xs text-gray-500 block mb-1">اسم المنتج *</label>
+                <input
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="مثال: طقم أواني 6 قطع"
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                />
               </div>
 
               {/* Category */}

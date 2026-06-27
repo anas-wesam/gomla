@@ -116,8 +116,10 @@ export default function HomePage() {
                 style={{ background: "#111", border: "1px solid #1e1e1e" }}
               >
                 {/* Image area */}
-                <div className="h-36 flex items-center justify-center text-6xl relative" style={{ background: "#161616" }}>
-                  {p.image}
+                <div className="h-36 flex items-center justify-center text-6xl relative overflow-hidden" style={{ background: "#161616" }}>
+                  {p.image?.startsWith("data:") || p.image?.startsWith("http")
+                    ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                    : p.image}
                   {p.discount && (
                     <span className="absolute top-3 right-3 text-black text-xs font-black px-2 py-1 rounded-full" style={{ background: "#f59e0b" }}>
                       -{p.discount}%
@@ -175,8 +177,10 @@ export default function HomePage() {
             style={{ background: "#111", border: "1px solid #1e1e1e" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="h-52 flex items-center justify-center text-8xl relative" style={{ background: "#161616" }}>
-              {product.image}
+            <div className="h-52 flex items-center justify-center text-8xl relative overflow-hidden" style={{ background: "#161616" }}>
+              {product.image?.startsWith("data:") || product.image?.startsWith("http")
+                ? <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                : product.image}
               {product.discount && (
                 <span className="absolute top-4 right-4 text-black text-sm font-black px-3 py-1 rounded-full" style={{ background: "#f59e0b" }}>
                   -{product.discount}%
