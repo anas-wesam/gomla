@@ -115,11 +115,11 @@ export default function HomePage() {
                 className="rounded-2xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-2xl"
                 style={{ background: "#111", border: "1px solid #1e1e1e" }}
               >
-                {/* Image area */}
-                <div className="h-36 flex items-center justify-center text-6xl relative overflow-hidden" style={{ background: "#161616" }}>
+                {/* Image area — full contain */}
+                <div className="relative flex items-center justify-center text-6xl" style={{ background: "#161616", minHeight: "180px" }}>
                   {p.image?.startsWith("data:") || p.image?.startsWith("http")
-                    ? <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
-                    : p.image}
+                    ? <img src={p.image} alt={p.name} className="w-full object-contain" style={{ maxHeight: "220px" }} />
+                    : <span className="py-8 block">{p.image}</span>}
                   {p.discount && (
                     <span className="absolute top-3 right-3 text-black text-xs font-black px-2 py-1 rounded-full" style={{ background: "#f59e0b" }}>
                       -{p.discount}%
@@ -156,6 +156,9 @@ export default function HomePage() {
                     <div className="text-left text-xs" style={{ color: "#555" }}>
                       <div>حد أدنى</div>
                       <div className="font-bold text-white">{p.minOrder} {p.unit}</div>
+                      {p.piecesPerCarton && (
+                        <div className="font-bold text-white mt-0.5">{p.piecesPerCarton} قطعة/كرتونة</div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -177,10 +180,10 @@ export default function HomePage() {
             style={{ background: "#111", border: "1px solid #1e1e1e" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="h-52 flex items-center justify-center text-8xl relative overflow-hidden" style={{ background: "#161616" }}>
+            <div className="flex items-center justify-center text-8xl relative" style={{ background: "#161616", minHeight: "200px" }}>
               {product.image?.startsWith("data:") || product.image?.startsWith("http")
-                ? <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                : product.image}
+                ? <img src={product.image} alt={product.name} className="w-full object-contain" style={{ maxHeight: "260px" }} />
+                : <span className="py-8 block">{product.image}</span>}
               {product.discount && (
                 <span className="absolute top-4 right-4 text-black text-sm font-black px-3 py-1 rounded-full" style={{ background: "#f59e0b" }}>
                   -{product.discount}%
@@ -195,20 +198,26 @@ export default function HomePage() {
               <h2 className="text-xl font-black text-white mt-2 mb-1">{product.name}</h2>
               <p className="text-sm leading-relaxed mb-4" style={{ color: "#666" }}>{product.description}</p>
 
-              <div className="grid grid-cols-2 gap-3 rounded-xl p-4 mb-4" style={{ background: "#161616" }}>
+              <div className={`grid gap-3 rounded-xl p-4 mb-4 ${product.piecesPerCarton ? "grid-cols-3" : "grid-cols-2"}`} style={{ background: "#161616" }}>
                 <div className="text-center">
-                  <div className="text-2xl font-black" style={{ color: product.discount ? "#f59e0b" : "#fff" }}>
+                  <div className="text-xl font-black" style={{ color: product.discount ? "#f59e0b" : "#fff" }}>
                     {product.discount ? Math.round(product.price * (1 - product.discount / 100)) : product.price} جم
                   </div>
                   {product.discount && (
-                    <div className="text-sm line-through" style={{ color: "#444" }}>{product.price} جم</div>
+                    <div className="text-xs line-through" style={{ color: "#444" }}>{product.price} جم</div>
                   )}
                   <div className="text-xs mt-1" style={{ color: "#555" }}>سعر الجملة / {product.unit}</div>
                 </div>
                 <div className="text-center" style={{ borderRight: "1px solid #222" }}>
-                  <div className="text-2xl font-black text-white">{product.minOrder}</div>
+                  <div className="text-xl font-black text-white">{product.minOrder}</div>
                   <div className="text-xs mt-1" style={{ color: "#555" }}>الحد الأدنى ({product.unit})</div>
                 </div>
+                {product.piecesPerCarton && (
+                  <div className="text-center" style={{ borderRight: "1px solid #222" }}>
+                    <div className="text-xl font-black text-white">{product.piecesPerCarton}</div>
+                    <div className="text-xs mt-1" style={{ color: "#555" }}>قطعة / كرتونة</div>
+                  </div>
+                )}
               </div>
 
               <div className="flex items-center gap-2 mb-4">

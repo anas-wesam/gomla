@@ -9,6 +9,7 @@ export interface Product {
   image: string;
   inStock: boolean;
   discount?: number;
+  piecesPerCarton?: number;
 }
 
 export const categories = [

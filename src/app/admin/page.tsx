@@ -18,6 +18,7 @@ const emptyForm = (): Omit<Product, "id"> => ({
   image: "📦",
   inStock: true,
   discount: undefined,
+  piecesPerCarton: undefined,
 });
 
 export default function AdminPage() {
@@ -333,6 +334,19 @@ export default function AdminPage() {
                     className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
+              </div>
+
+              {/* Pieces per carton */}
+              <div>
+                <label className="text-xs text-gray-500 block mb-1">عدد القطع في الكرتونة (اختياري)</label>
+                <input
+                  type="number"
+                  value={form.piecesPerCarton ?? ""}
+                  onChange={(e) => setForm({ ...form, piecesPerCarton: e.target.value ? Number(e.target.value) : undefined })}
+                  placeholder="مثال: 12"
+                  min={1}
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                />
               </div>
 
               {/* Min Order & Unit */}
