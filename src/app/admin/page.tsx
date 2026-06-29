@@ -3,8 +3,20 @@
 import { useState } from "react";
 import { useProducts } from "@/lib/useProducts";
 import { categories, Product } from "@/lib/products";
-import { Plus, Pencil, Trash2, LogOut, Save, X, RotateCcw, Eye } from "lucide-react";
+import { Plus, Pencil, Trash2, LogOut, Save, X, Eye, Loader2 } from "lucide-react";
 import Link from "next/link";
+
+const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
+const UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!;
+
+async function uploadToCloudinary(file: File): Promise<string> {
+  const fd = new FormData();
+  fd.append("file", file);
+  fd.append("upload_preset", UPLOAD_PRESET);
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, { method: "POST", body: fd });
+  const data = await res.json();
+  return data.secure_url;
+}
 
 const ADMIN_PASSWORD = "gomla123";
 
@@ -26,8 +38,9 @@ export default function AdminPage() {
   const [pass, setPass] = useState("");
   const [passError, setPassError] = useState(false);
 
-  const { products, addProduct, updateProduct, deleteProduct, resetToDefault } = useProducts();
+  const { products, loading, addProduct, updateProduct, deleteProduct } = useProducts();
   const [editing, setEditing] = useState<Product | null>(null);
+  const [uploading, setUploading] = useState(false);
   const [adding, setAdding] = useState(false);
   const [form, setForm] = useState<Omit<Product, "id">>(emptyForm());
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
@@ -248,17 +261,22 @@ export default function AdminPage() {
                   </div>
                   <div className="flex-1 space-y-2">
                     <label className="flex items-center justify-center gap-2 cursor-pointer w-full py-2.5 rounded-xl text-sm font-medium border border-gray-200 hover:bg-gray-50 transition-colors">
-                      <span>📁 رفع صورة</span>
+                      {uploading ? <><Loader2 size={15} className="animate-spin" /> جاري الرفع...</> : <><span>📁</span> رفع صورة</>}
                       <input
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => {
+                        disabled={uploading}
+                        onChange={async (e) => {
                           const file = e.target.files?.[0];
                           if (!file) return;
-                          const reader = new FileReader();
-                          reader.onload = () => setForm({ ...form, image: reader.result as string });
-                          reader.readAsDataURL(file);
+                          setUploading(true);
+                          try {
+                            const url = await uploadToCloudinary(file);
+                            setForm((f) => ({ ...f, image: url }));
+                          } finally {
+                            setUploading(false);
+                          }
                         }}
                       />
                     </label>

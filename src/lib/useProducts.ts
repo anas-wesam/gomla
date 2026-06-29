@@ -1,39 +1,43 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { products as defaultProducts, Product } from "./products";
-
-const STORAGE_KEY = "gomla_products";
+import { Product } from "./products";
 
 export function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    setProducts(stored ? JSON.parse(stored) : defaultProducts);
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data) => { setProducts(data); setLoading(false); })
+      .catch(() => setLoading(false));
   }, []);
 
-  function save(updated: Product[]) {
-    setProducts(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  async function addProduct(p: Omit<Product, "id">) {
+    const res = await fetch("/api/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(p),
+    });
+    const created = await res.json();
+    setProducts((prev) => [created, ...prev]);
   }
 
-  function addProduct(p: Omit<Product, "id">) {
-    const id = Date.now();
-    save([...products, { ...p, id }]);
+  async function updateProduct(p: Product) {
+    const res = await fetch(`/api/products/${p.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(p),
+    });
+    const updated = await res.json();
+    setProducts((prev) => prev.map((x) => (x.id === p.id ? updated : x)));
   }
 
-  function updateProduct(p: Product) {
-    save(products.map((x) => (x.id === p.id ? p : x)));
+  async function deleteProduct(id: number) {
+    await fetch(`/api/products/${id}`, { method: "DELETE" });
+    setProducts((prev) => prev.filter((x) => x.id !== id));
   }
 
-  function deleteProduct(id: number) {
-    save(products.filter((x) => x.id !== id));
-  }
-
-  function resetToDefault() {
-    save(defaultProducts);
-  }
-
-  return { products, addProduct, updateProduct, deleteProduct, resetToDefault };
+  return { products, loading, addProduct, updateProduct, deleteProduct };
 }
